@@ -7,7 +7,7 @@ import 'package:islami_app/home/tabs/settings.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = 'home';
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 30,
-                  fontFamily: 'el-messiri'),
+                  fontFamily: 'el-mesirri'),
             ),
             centerTitle: true,
           ),
@@ -82,10 +82,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
    List <Widget> tabs =[
-    RadioTab(),
-    SebhaTab(),
-    AhadeethTab(),
-    QuranTab(),
-    SettingsTab()
+    const RadioTab(),
+    const SebhaTab(),
+    const AhadeethTab(),
+    const QuranTab(),
+    const SettingsTab()
   ];
 }
