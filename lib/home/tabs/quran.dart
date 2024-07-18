@@ -5,6 +5,9 @@ class QuranTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column();
+    return Column(
+      children: [
+      ],
+    );
   }
 }
