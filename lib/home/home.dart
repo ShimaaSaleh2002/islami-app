@@ -21,7 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset('assets/images/bg3.png'),
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg3.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -29,9 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text(
               'إسلامي',
               style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 30,
-                  fontFamily: 'el-mesirri'),
+                fontWeight: FontWeight.w700,
+                fontSize: 30,
+                fontFamily: 'el-mesirri',
+              ),
             ),
             centerTitle: true,
           ),
@@ -49,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Color(0xFFB7935F),
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/quran-quran-svgrepo-com.png')),
+                icon: ImageIcon(
+                    AssetImage('assets/images/quran-quran-svgrepo-com.png')),
                 label: '',
                 backgroundColor: Color(0xFFB7935F),
               ),
@@ -63,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: '',
                 backgroundColor: Color(0xFFB7935F),
               ),
-
             ],
             currentIndex: selectedIndex,
             onTap: (value) {
@@ -75,17 +83,17 @@ class _HomeScreenState extends State<HomeScreen> {
             unselectedItemColor: Colors.white,
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            //backgroundColor: Color(0xFFB7935F),
           ),
         ),
       ],
     );
   }
-   List <Widget> tabs =[
+
+  List<Widget> tabs = [
     const RadioTab(),
     const SebhaTab(),
     const AhadeethTab(),
-    const QuranTab(),
-    const SettingsTab()
+    QuranTab(),
+    const SettingsTab(),
   ];
 }
