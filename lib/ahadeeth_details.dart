@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islami_app/sura_model.dart';
 
-class SuraDetails extends StatefulWidget {
-  static const String routeName = 'suraDetails';
-  const SuraDetails({super.key});
+import 'ahadeeth_model.dart';
 
-  @override
-  State<SuraDetails> createState() => _SuraDetailsState();
-}
+class AhadeethDetails extends StatelessWidget {
+  static const String routeName = 'ahadeethDatails';
+  const AhadeethDetails({super.key});
 
-class _SuraDetailsState extends State<SuraDetails> {
-  List<String> verses = [];
   @override
   Widget build(BuildContext context) {
-    var model = ModalRoute.of(context)?.settings.arguments as SuraModel;
-    if (verses.isEmpty) {
-      loadSuraFiles(model.index);
-    }
+    var model = ModalRoute.of(context)?.settings.arguments as HadeethModel;
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(image: AssetImage('assets/images/bg3.png'),fit: BoxFit.fill),
@@ -28,7 +19,7 @@ class _SuraDetailsState extends State<SuraDetails> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             title: Text(
-              model.name,
+              model.title,
               style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 30,
@@ -41,36 +32,28 @@ class _SuraDetailsState extends State<SuraDetails> {
             margin: const EdgeInsets.all(12),
             elevation: 4,
             shape: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25),
-              borderSide: const BorderSide(color: Colors.transparent)
+                borderRadius: BorderRadius.circular(25),
+                borderSide: const BorderSide(color: Colors.transparent)
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Text(
-                    '${verses[index]}(${index+1})',
+                    model.content[index],
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.start,
                     style: GoogleFonts.inder(
                         textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    )),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        )),
                   );
                 },
-                itemCount: 114,
+                itemCount: model.content.length,
               ),
             ),
           ),
         ));
-  }
-
-  loadSuraFiles(int index) async {
-    String sura = await rootBundle.loadString('assets/files/${index + 1}.txt');
-
-    List<String> suraLines = sura.trim().split('\n');
-    verses = suraLines;
-    setState(() {});
   }
 }
