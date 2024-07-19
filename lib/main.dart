@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/sura_details.dart';
 import 'home/home.dart';
 void main(){
   runApp(const MyApp());
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
       routes: {
-        HomeScreen.routeName : (context) => const HomeScreen(),
+        HomeScreen.routeName : (context) =>  HomeScreen(),
+        SuraDetails.routeName : (context) =>  SuraDetails(),
       },
     );
   }
