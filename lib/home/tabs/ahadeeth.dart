@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:islami_app/ahadeeth_model.dart';
 import '../../ahadeeth_details.dart';
-import '../../ahadeeth_model.dart';
 
 class AhadeethTab extends StatefulWidget {
   AhadeethTab({super.key});
@@ -13,77 +13,82 @@ class AhadeethTab extends StatefulWidget {
 }
 
 class _AhadeethTabState extends State<AhadeethTab> {
-  List<HadeethModel> allAhadeeth = [];
+  List<HadeethModel> allAhadeth = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadHadethFile();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (allAhadeeth.isEmpty) {
-      loadAhadeethFile();
-    }
+    // if(allAhadeth.isEmpty){
+    //   loadHadethFile();
+    // }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image(
-          image: AssetImage('assets/images/allah.png'),
+        Image.asset(
+          "assets/images/allah.png",
           height: 219,
         ),
-        const Divider(
-          thickness: 3,
-          color: Color(0xFFB7935F),
-        ),
-        const Text(
-          'الأحاديث',
-          style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontFamily: 'el-mesirri',
-              fontSize: 25),
+        const Divider(),
+        Text(
+          'ahadeth'.tr(),
           textAlign: TextAlign.center,
+          style: GoogleFonts.elMessiri(
+            fontSize: 25,
+          ),
         ),
-        const Divider(
-          thickness: 3,
-          color: Color(0xFFB7935F),
-        ),
+        const Divider(),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) {
-              return Divider();
-            },
+            separatorBuilder: (context, index) =>const Divider(
+              thickness: 1,
+              endIndent: 40,
+              indent: 40,
+            ),
             itemBuilder: (context, index) {
-              return InkWell(
-                onTap : (){
+              return GestureDetector(
+                onTap: () {
                   Navigator.pushNamed(context, AhadeethDetails.routeName,
-                      arguments: allAhadeeth[index]);
+                      arguments: allAhadeth[index]);
                 },
-                  child :Text(
-                allAhadeeth[index].title,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inder(
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.w400, fontSize: 25)),
-              ));
+                child: Text(
+                  allAhadeth[index].title,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              );
             },
-            itemCount: allAhadeeth.length,
+            itemCount: allAhadeth.length,
           ),
         )
       ],
     );
   }
 
-  loadAhadeethFile() async {
-    String ahadeethFile =
-        await rootBundle.loadString('assets/files/ahadeth.txt');
+  loadHadethFile() {
+    rootBundle.loadString("assets/files/ahadeth.txt").then((value) {
+      List<String> ahadeth = value.split("#");
 
-    List<String> ahadeeth = ahadeethFile.trim().split('#');
-    for (int i = 0; i < ahadeeth.length; ++i) {
-      String hadeeth = ahadeeth[i];
-      List<String> hadeethLines = hadeeth.trim().split('\n');
-      String title = hadeethLines[0];
-      hadeethLines.removeAt(0);
-      List<String> content = hadeethLines;
+      for (int i = 0; i < ahadeth.length; i++) {
+        String hadeth = ahadeth[i];
 
-      HadeethModel hadeethModel = HadeethModel(title, content);
-      allAhadeeth.add(hadeethModel);
-    }
-    setState(() {});
+        List<String> hadethLines = hadeth.trim().split("\n");
+
+        String title = hadethLines[0];
+
+        hadethLines.removeAt(0);
+
+        List<String> content = hadethLines;
+        HadeethModel hadethModel = HadeethModel(title, content);
+
+        print(title);
+        allAhadeth.add(hadethModel);
+        setState(() {});
+      }
+    });
   }
 }

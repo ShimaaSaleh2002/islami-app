@@ -1,7 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islami_app/sura_details.dart';
-import 'package:islami_app/sura_model.dart';
+import '../../sura_details.dart';
+import '../../sura_model.dart';
 
 class QuranTab extends StatelessWidget {
   QuranTab({super.key});
@@ -122,74 +123,55 @@ class QuranTab extends StatelessWidget {
     "الفلق",
     "الناس"
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Image.asset(
-          'assets/images/qurantab.png',
+          "assets/images/qurantab.png",
           height: 227,
         ),
-        const Divider(
-          thickness: 3,
-          color: Color(0xFFB7935F),
-        ),
-        const Text(
-          'اسم السورة',
-          style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontFamily: 'el-mesirri',
-              fontSize: 25),
+        const Divider(),
+        Text(
+          'sura_names'.tr(),
           textAlign: TextAlign.center,
+          style: GoogleFonts.elMessiri(
+            fontSize: 25,
+          ),
         ),
-        const Divider(
-          thickness: 3,
-          color: Color(0xFFB7935F),
-        ),
+        const Divider(),
         Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) {
-              return const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: Align(
-                        alignment : Alignment.centerRight,
-                        child: Icon(
-                          Icons.star,
-                          color: Color(0xFFB7935F),
-                        ),
-                      )),
-                  Expanded(
-                    flex : 2,
-                      child: Divider(
-                    color: Color(0xFFB7935F),
-                  )),
-                  Expanded(
-                      child: Align(
-                        alignment : Alignment.centerLeft,
-                        child: Icon(
-                                            Icons.star,
-                                            color: Color(0xFFB7935F),
-                                          ),
-                      )),
-                ],
-              );
-            },
+            separatorBuilder: (context, index) => const Row(
+              children:[
+                Expanded(
+                    child: Icon(
+                      Icons.star_border,
+                    )),
+                Expanded(
+                  flex: 2,
+                  child: Divider(
+                    thickness: 1,
+                  ),
+                ),
+                Expanded(
+                    child: Icon(
+                      Icons.star_border,
+                    )),
+              ],
+            ),
             itemBuilder: (context, index) {
               return InkWell(
-                //to perform action on any widget
                 onTap: () {
                   Navigator.pushNamed(context, SuraDetails.routeName,
                       arguments: SuraModel(suraNames[index], index));
                 },
                 child: Text(
                   suraNames[index],
+                  style: Theme.of(context).textTheme.bodyMedium,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.inder(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 25)),
                 ),
               );
             },

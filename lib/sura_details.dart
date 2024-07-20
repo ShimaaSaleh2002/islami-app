@@ -49,7 +49,7 @@ class _SuraDetailsState extends State<SuraDetails> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Text(
-                    '${verses[index]}(${index+1})',
+                    '${verses[index]} (${index+1})',
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.start,
                     style: GoogleFonts.inder(
@@ -59,7 +59,7 @@ class _SuraDetailsState extends State<SuraDetails> {
                     )),
                   );
                 },
-                itemCount: 114,
+                itemCount: verses.length,
               ),
             ),
           ),
