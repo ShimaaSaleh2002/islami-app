@@ -9,7 +9,7 @@ class MyThemeData {
     appBarTheme: AppBarTheme(
       color: Colors.transparent,
       elevation: 0,
-      iconTheme:const IconThemeData(size: 30, color: Color(0xFF242424)),
+      iconTheme: const IconThemeData(size: 30, color: Color(0xFF242424)),
       centerTitle: true,
       titleTextStyle: GoogleFonts.elMessiri(
         fontSize: 30,
@@ -18,9 +18,10 @@ class MyThemeData {
       ),
       shadowColor: Colors.transparent,
     ),
-    dividerTheme:const DividerThemeData(color: AppColors.primary, thickness: 3),
-    iconTheme:const IconThemeData(color: AppColors.primary, size: 25),
-    bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+    dividerTheme:
+        const DividerThemeData(color: AppColors.primary, thickness: 3),
+    iconTheme: const IconThemeData(color: AppColors.primary, size: 25),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: AppColors.colorBlack,
       unselectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
@@ -64,7 +65,7 @@ class MyThemeData {
     appBarTheme: AppBarTheme(
       color: Colors.transparent,
       elevation: 0,
-      iconTheme:const IconThemeData(size: 30, color: Colors.white),
+      iconTheme: const IconThemeData(size: 30, color: Colors.white),
       centerTitle: true,
       titleTextStyle: GoogleFonts.elMessiri(
         fontSize: 30,
@@ -73,9 +74,10 @@ class MyThemeData {
       ),
       shadowColor: Colors.transparent,
     ),
-    dividerTheme:const DividerThemeData(color: AppColors.primary, thickness: 3),
-    iconTheme:const IconThemeData(color: AppColors.yellowColor, size: 25),
-    bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+    dividerTheme:
+        const DividerThemeData(color: AppColors.primary, thickness: 3),
+    iconTheme: const IconThemeData(color: AppColors.yellowColor, size: 25),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: AppColors.yellowColor,
       unselectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,

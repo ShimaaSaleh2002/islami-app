@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/providers/my_provider.dart';
 import 'package:islami_app/sura_model.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetails extends StatefulWidget {
   static const String routeName = 'suraDetails';
@@ -15,18 +17,19 @@ class _SuraDetailsState extends State<SuraDetails> {
   List<String> verses = [];
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<MyProvider>(context);
     var model = ModalRoute.of(context)?.settings.arguments as SuraModel;
-    if (verses.isEmpty) {
+    if (verses.isEmpty) { //when it is empty?
       loadSuraFiles(model.index);
     }
     return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/bg3.png'),fit: BoxFit.fill),
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage(pro.appTheme == ThemeMode.light
+              ? "assets/images/bg3.png"
+              : "assets/images/bgdark.png"),fit: BoxFit.fill),
         ),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
           appBar: AppBar(
-            backgroundColor: Colors.transparent,
             title: Text(
               model.name,
               style: const TextStyle(
@@ -34,7 +37,6 @@ class _SuraDetailsState extends State<SuraDetails> {
                   fontSize: 30,
                   fontFamily: 'el-mesirri'),
             ),
-            centerTitle: true,
           ),
           body: Card(
             color: const Color(0xCBB7935F),

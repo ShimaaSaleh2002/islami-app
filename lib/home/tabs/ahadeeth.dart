@@ -16,7 +16,7 @@ class _AhadeethTabState extends State<AhadeethTab> {
   List<HadeethModel> allAhadeth = [];
 
   @override
-  void initState() {
+  void initState() { /////////////////////////////////////////////////
     super.initState();
     loadHadethFile();
   }
