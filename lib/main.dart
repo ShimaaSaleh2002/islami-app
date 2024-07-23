@@ -4,6 +4,7 @@ import 'package:islami_app/ahadeeth_details.dart';
 import 'package:islami_app/providers/my_provider.dart';
 import 'package:islami_app/sura_details.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home/home.dart';
 import 'my_theme_data.dart';
 
@@ -30,17 +31,21 @@ void main() async {
           path: 'assets/translations',
           saveLocale: true,
           startLocale:const Locale("en"),
-          child:const MyApp()),
+          child: MyApp()),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  late MyProvider pro;
+   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var pro = Provider.of<MyProvider>(context);
+    pro = Provider.of<MyProvider>(context);
+    getTheme();
+    //var pro = Provider.of<MyProvider>(context);
+    //pro.getTheme();
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -56,5 +61,19 @@ class MyApp extends StatelessWidget {
         AhadeethDetails.routeName: (context) => const AhadeethDetails(),
       },
     );
+  }
+  getTheme() async{
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Try reading data from the 'repeat' key. If it doesn't exist, returns null.
+    final bool? isLLight = prefs.getBool('isLight');
+    if(isLLight!=null){
+      if(isLLight){
+        pro.appTheme = ThemeMode.light;
+      }else{
+        pro.appTheme = ThemeMode.dark;
+      }
+    }
+    pro.notifyListeners();
   }
 }

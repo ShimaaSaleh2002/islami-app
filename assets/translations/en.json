@@ -7,5 +7,7 @@
   "light": "Light",
   "language": "language",
   "english": "English",
-  "arabic": "Arabic"
+  "arabic": "Arabic",
+  "number_tasbeeh" : "Number of Tasbeehs"
+
 }
